@@ -4,21 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 //ICONS
-//import icons here
+import GitHubIcon from "../public/assets/icons/github-142-svgrepo-com.svg";
+import ArrowIcon from "../public/assets/icons/arrow-up-337-svgrepo-com.svg";
 
 //IMAGES
-//for stickers
-import FerarriImage from "../public/assets/images/pngimg.com - ferrari_PNG10657.png";
-import ComputerImage from "../public/assets/images/111902_mbp14-silver2.png";
-import ControllerImage from "../public/assets/images/pngimg.com - xbox_PNG17527.png";
-import RolexImage from "../public/assets/images/22576-7-rolex-watch-transparent-image.png";
-import JordansImage from "../public/assets/images/Air-Jordan-PNG-Pic-Background.png";
-import ShirtImage from "../public/assets/images/louis-vuitton-flocked-lv-t-shirt--FRTS59UOL904_PM2_Front view.webp";
-import CologneImage from "../public/assets/images/zxf8ta6p0qmq-prada-lhomme.png";
-//other images
-import BoxImage from "../public/assets/images/box-cartone_preview_0c50.png";
 import BoxLightImage from "../public/assets/images/box-light.png";
 import BoxItemsImage from "../public/assets/images/box-items.png";
+import BatmanImage from "../public/assets/images/batman-01-logo-png-transparent.png";
+import RolexImage from "../public/assets/images/22576-7-rolex-watch-transparent-image.png";
+import GatorsImage from "../public/assets/images/Florida_Gators_gator_logo.svg.png";
 
 export default function Home() {
   const [navMenuOpen, setNavMenuOpen] = useState(false);
@@ -32,38 +26,60 @@ export default function Home() {
         {/* RIGHT SIDE */}
         <div className="flex gap-4 items-center">
           {/* SIGN-IN BUTTON */}
-          <button className="bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-full hover:shadow-inner duration-75">
+          <button className="flex justify-center items-center bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-full hover:shadow-inner duration-75">
             Sign In
+            <div className=" arrow flex items-center justify-center">
+              <div className="arrowMiddle"></div>
+              <div>
+                <Image
+                  src={ArrowIcon}
+                  alt=""
+                  width={14}
+                  height={14}
+                  className="arrowSide"
+                ></Image>
+              </div>
+            </div>
           </button>
           {/* NAV MENU */}
           <div
             className={
               navMenuOpen
-                ? "flex flex-col duration-100"
-                : "flex flex-col gap-1 duration-100"
+                ? "flex flex-col duration-100 relative"
+                : "flex flex-col gap-1 duration-100 relative"
             }
             onClick={() => setNavMenuOpen(!navMenuOpen)}
           >
             <div
               className={
                 navMenuOpen
-                  ? "w-4 h-[2px] bg-gray-700 rotate-45 translate-y-[1px] rounded-full duration-100"
-                  : "w-4 h-[2px] bg-gray-700 rounded-full duration-100"
+                  ? "w-4 h-[2px] bg-black rotate-45 translate-y-[1px] rounded-full duration-100"
+                  : "w-4 h-[2px] bg-black rounded-full duration-100"
               }
             ></div>
             <div
               className={
                 navMenuOpen
-                  ? "w-4 h-[2px] bg-gray-700 -rotate-45 translate-y-[-1px] rounded-full duration-100"
-                  : "w-4 h-[2px] bg-gray-700 rounded-full duration-100"
+                  ? "w-4 h-[2px] bg-black -rotate-45 translate-y-[-1px] rounded-full duration-100"
+                  : "w-4 h-[2px] bg-black rounded-full duration-100"
               }
             ></div>
+            {navMenuOpen && (
+              <div className="z-50 absolute top-8 right-0 bg-gray-50/60 backdrop-blur-md p-6 rounded-3xl shadow-lg border border-black flex w-max">
+                <div className="flex flex-col gap-4">
+                  <h2>Home</h2>
+                  <p>All Boxes</p>
+                  <p>About Us</p>
+                  <p>Contact Us</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
       {/* TITLE CONTENT */}
-      <div className=" p-6 relative overflow-hidden h-[600px] sm:h-[800px] xl:h-[1000px] rounded-3xl flex flex-col items-center bg-[linear-gradient(to_bottom,theme(colors.gray.50)_20%,theme(colors.purple.200)_60%,theme(colors.yellow.200)_80%,theme(colors.pink.200)_100%)]">
-        <div className="relative z-20 t text-center mt-16">
+      <div className="p-6 relative overflow-hidden h-[600px] sm:h-[800px] xl:h-[1000px] rounded-3xl flex flex-col items-center bg-[linear-gradient(to_bottom,theme(colors.gray.50)_20%,theme(colors.purple.200)_60%,theme(colors.yellow.200)_80%,theme(colors.pink.200)_100%)]">
+        <div className="t relative z-20 text-center mt-16 bg-gradient-to-b from-black via-black to-transparent bg-clip-text text-transparent">
           Unbox the unexpected.
         </div>
         <Image
@@ -76,76 +92,159 @@ export default function Home() {
           alt="Box Items Image"
           className="absolute bottom-0 z-10"
         ></Image>
-        {/* <Image
-          src={BoxImage}
-          alt="Box Image"
-          className="absolute bottom-0 top-0 my-auto w-4/5 max-w-5xl translate-y-72"
-        ></Image> */}
-        {/* STICKERS */}
-        {/* <div className="absolute top-6 bottom-6 left-12 right-12 flex gap-3 justify-between items-center">
-          <div className="w-44 drop-shadow-md -translate-y-80">
-            <div className="absolute inset-0 transform scale-x-[1.1] scale-y-[1.2] filter brightness-0 saturate-100 invert">
-              <Image src={FerarriImage} alt="Ferarri Outline" className="" />
+      </div>
+      {/* PAGE CONTENT */}
+      <div className="">
+        <div className="t relative z-20 mt-16 bg-gradient-to-b from-black via-black to-transparent bg-clip-text text-transparent">
+          Featured boxes
+        </div>
+        <div className="flex justify-between gap-4 mt-4">
+          <div className="flex-1">
+            <div className="overflow-hidden relative rounded-3xl min-h-44 bg-gradient-to-t from-gray-100 to-gray-50">
+              <div className="blur-xl">
+                <div className="absolute top-0 w-full h-60 translate-y-16 left-0 right-0 m-auto rounded-full bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200"></div>
+              </div>
+              <Image
+                src={BoxLightImage}
+                alt="Box Light Image"
+                className="absolute bottom-0 left-0 right-0 w-3/5 m-auto"
+              ></Image>
+              {/* <Image
+                src={RolexImage}
+                alt="Rolex Image"
+                className="absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
+              ></Image> */}
             </div>
-            <Image
-              src={FerarriImage}
-              alt="Ferarri Image"
-              className="relative"
-            />
-          </div>
-          <div className="w-44 drop-shadow-md -translate-y-0">
-            <div className="absolute inset-0 transform scale-x-[1.1] scale-y-[1.1] filter brightness-0 saturate-100 invert">
-              <Image src={ComputerImage} alt="Ferarri Outline" className="" />
+            <div className="mt-4">
+              <h1>Designer Watches</h1>
+              <p>Unbox for your chance to win a Rolex or Swiss Army watch.</p>
+              <button className="flex justify-center items-center mt-4 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-full hover:shadow-inner duration-75">
+                Unbox
+                <div className=" arrow flex items-center justify-center">
+                  <div className="arrowMiddle"></div>
+                  <div>
+                    <Image
+                      src={ArrowIcon}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className="arrowSide"
+                    ></Image>
+                  </div>
+                </div>
+              </button>
             </div>
-            <Image
-              src={ComputerImage}
-              alt="Ferarri Image"
-              className="relative"
-            />
           </div>
-          <div className="w-36 drop-shadow-md -translate-y-32">
-            <div className="absolute inset-0 transform scale-x-[1.1] scale-y-[1.25] translate-y-[2px] filter brightness-0 saturate-100 invert">
-              <Image src={ControllerImage} alt="Ferarri Outline" className="" />
+          <div className="flex-1">
+            <div className="overflow-hidden relative rounded-3xl min-h-44 bg-gradient-to-t from-gray-100 to-gray-50">
+              <div className="blur-xl">
+                <div className="absolute top-0 w-full h-60 translate-y-16 left-0 right-0 m-auto rounded-full bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200"></div>
+              </div>
+              <Image
+                src={BoxLightImage}
+                alt="Box Light Image"
+                className="absolute bottom-0 left-0 right-0 w-3/5 m-auto"
+              ></Image>
+              {/* <Image
+                src={BatmanImage}
+                alt="Batman Image"
+                className="absolute z-20 w-32 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
+              ></Image> */}
             </div>
-            <Image
-              src={ControllerImage}
-              alt="Ferarri Image"
-              className="relative"
-            />
-          </div>
-          <div className="w-24 drop-shadow-md -translate-y-80">
-            <div className="absolute inset-0 transform scale-x-[1.2] scale-y-[1.1] filter brightness-0 saturate-100 invert">
-              <Image src={RolexImage} alt="Ferarri Outline" className="" />
+            <div className="mt-4">
+              <h1>Batman</h1>
+              <p>
+                Unbox a Batman-themed box where you could win an action figure
+                or a real Batmobile!
+              </p>
+              <button className="flex justify-center items-center mt-4 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-full hover:shadow-inner duration-75">
+                Unbox
+                <div className=" arrow flex items-center justify-center">
+                  <div className="arrowMiddle"></div>
+                  <div>
+                    <Image
+                      src={ArrowIcon}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className="arrowSide"
+                    ></Image>
+                  </div>
+                </div>
+              </button>
             </div>
-            <Image src={RolexImage} alt="Ferarri Image" className="relative" />
-          </div>
-          <div className="w-44 drop-shadow-md translate-y-10">
-            <div className="absolute inset-0 transform scale-x-[1.2] scale-y-[1.2] translate-x-1 -translate-y-[2px] filter brightness-0 saturate-100 invert">
-              <Image src={JordansImage} alt="Ferarri Outline" className="" />
+          </div>{" "}
+          <div className="flex-1">
+            <div className="overflow-hidden relative rounded-3xl min-h-44 bg-gradient-to-t from-gray-100 to-gray-50">
+              <div className="blur-xl">
+                <div className="absolute top-0 w-full h-60 translate-y-16 left-0 right-0 m-auto rounded-full bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200"></div>
+              </div>
+              <Image
+                src={BoxLightImage}
+                alt="Box Light Image"
+                className="absolute bottom-0 left-0 right-0 w-3/5 m-auto"
+              ></Image>
+              {/* <Image
+                src={GatorsImage}
+                alt="Gators Image"
+                className="absolute z-20 w-32 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
+              ></Image> */}
             </div>
-            <Image
-              src={JordansImage}
-              alt="Ferarri Image"
-              className="relative"
-            />
-          </div>
-          <div className="w-52 drop-shadow-md -translate-y-44">
-            <div className="absolute inset-0 transform scale-x-[1.3] scale-y-[1.1] filter brightness-0 saturate-100 invert">
-              <Image src={ShirtImage} alt="Ferarri Outline" className="" />
+            <div className="mt-4">
+              <h1>Florida Gators</h1>
+              <p>
+                Unbox for your chance to win a t-shirt or signed Tim Tebow
+                football!
+              </p>
+              <button className="flex justify-center items-center mt-4 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-full hover:shadow-inner duration-75">
+                Unbox
+                <div className=" arrow flex items-center justify-center">
+                  <div className="arrowMiddle"></div>
+                  <div>
+                    <Image
+                      src={ArrowIcon}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className="arrowSide"
+                    ></Image>
+                  </div>
+                </div>
+              </button>
             </div>
-            <Image src={ShirtImage} alt="Ferarri Image" className="relative" />
           </div>
-          <div className="w-20 drop-shadow-md translate-y-28">
-            <div className="absolute inset-0 transform scale-x-[1.25] scale-y-[1.1] filter brightness-0 saturate-100 invert">
-              <Image src={CologneImage} alt="Ferarri Outline" className="" />
-            </div>
-            <Image
-              src={CologneImage}
-              alt="Ferarri Image"
-              className="relative"
-            />
+        </div>
+      </div>
+      {/* FOOTER */}
+      <div className="flex gap-4 mt-16 lg:flex-row flex-col">
+        <div className="flex flex-col justify-between gap-4 lg:max-w-[380px]">
+          <div className="logo">LootBox Labs</div>
+          <div className="">
+            <Image src={GitHubIcon} alt="GitHubIcon" className="w-5"></Image>
+            <p className="mt-2">
+              © 2025 Lootbox Labs @ University of Florida. All Rights Reserved.
+            </p>
           </div>
-        </div> */}
+        </div>
+        <div className="w-[1px] bg-black/10 rounded-full mx-6"></div>
+        <div className="flex-1 flex gap-4 justify-between lg:flex-row flex-col">
+          <div className="flex flex-col gap-4">
+            <h2>Features</h2>
+            <p>All Boxes</p>
+            <p>Featured Boxes</p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2>About</h2>
+            <p>How Does It Work?</p>
+            <p>Meet The Team</p>
+            <p>Contact Us</p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2>Legal</h2>
+            <p>Terms of Use</p>
+            <p>Privacy Policy</p>
+          </div>
+        </div>
       </div>
     </div>
   );
