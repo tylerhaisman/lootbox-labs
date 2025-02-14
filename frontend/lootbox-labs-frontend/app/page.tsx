@@ -233,6 +233,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="border-t border-black mt-16"></div>
         </div>
         {/* <div className="relative p-6 mt-16 rounded-md bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200">
           <div
