@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { SignInButton, UserButton, useUser, SignUpButton } from "@clerk/nextjs";
 
 //ICONS
 import GitHubIcon from "../public/assets/icons/github-142-svgrepo-com.svg";
@@ -26,7 +27,7 @@ export default function Home() {
   const [viewSignIn, setViewSignIn] = useState(false);
   const [viewAuth, setViewAuth] = useState(false);
   const [viewRegister, setViewRegister] = useState(false);
-
+  const { isSignedIn } = useUser();
   return (
     <div className="relative">
       <div className="max-w-[1500px] m-auto p-6">
@@ -36,25 +37,30 @@ export default function Home() {
           <div className="logo">LootBox Labs</div>
           {/* RIGHT SIDE */}
           <div className="flex gap-4 items-center">
-            {/* SIGN-IN BUTTON */}
-            <button
-              className="flex justify-center items-center bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-md hover:shadow-inner duration-75"
-              onClick={() => setViewAuth(!viewAuth)}
-            >
+            {/* 🔹 Clerk Authentication Buttons (Sign In/Sign Up) */}
+            <nav className="flex gap-4 items-center">
+      {isSignedIn ? (
+        // If user is signed in, show the account button
+        <UserButton />
+      ) : (
+        // If user is not signed in, show Sign In and Sign Up buttons
+        <>
+          <SignInButton mode="modal">
+          <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-75">
               Sign In
-              <div className=" arrow flex items-center justify-center">
-                <div className="arrowMiddle"></div>
-                <div>
-                  <Image
-                    src={ArrowIcon}
-                    alt=""
-                    width={14}
-                    height={14}
-                    className="arrowSide"
-                  ></Image>
-                </div>
-              </div>
             </button>
+          </SignInButton>
+
+          <SignUpButton mode="modal">
+            <button className="bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-md hover:shadow-inner">
+              Sign Up
+            </button>
+          </SignUpButton>
+        </>
+      )}
+    </nav>
+
+            
             {/* NAV MENU */}
             <div
               className={

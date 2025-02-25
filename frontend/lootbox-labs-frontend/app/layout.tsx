@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import AuthGate from "./authgate"; // Import the Client Component
+console.log("AuthGate:", AuthGate);
 
 export const metadata: Metadata = {
   title: "LootBox Labs",
@@ -8,12 +11,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <AuthGate>{children}</AuthGate>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
