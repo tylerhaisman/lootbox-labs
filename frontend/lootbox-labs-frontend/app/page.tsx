@@ -39,28 +39,27 @@ export default function Home() {
           <div className="flex gap-4 items-center">
             {/* 🔹 Clerk Authentication Buttons (Sign In/Sign Up) */}
             <nav className="flex gap-4 items-center">
-      {isSignedIn ? (
-        // If user is signed in, show the account button
-        <UserButton />
-      ) : (
-        // If user is not signed in, show Sign In and Sign Up buttons
-        <>
-          <SignInButton mode="modal">
-          <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-75">
-              Sign In
-            </button>
-          </SignInButton>
+              {isSignedIn ? (
+                // If user is signed in, show the account button
+                <UserButton />
+              ) : (
+                // If user is not signed in, show Sign In and Sign Up buttons
+                <>
+                  <SignInButton mode="modal">
+                    <button className="px-4 py-2 border border-black rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-75">
+                      Sign In
+                    </button>
+                  </SignInButton>
 
-          <SignUpButton mode="modal">
-            <button className="bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-md hover:shadow-inner">
-              Sign Up
-            </button>
-          </SignUpButton>
-        </>
-      )}
-    </nav>
+                  <SignUpButton mode="modal">
+                    <button className="bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-md hover:shadow-inner">
+                      Sign Up
+                    </button>
+                  </SignUpButton>
+                </>
+              )}
+            </nav>
 
-            
             {/* NAV MENU */}
             <div
               className={
