@@ -16,9 +16,12 @@ export default function Nav() {
 
   return (
     <>
+     
       <div className="w-full flex justify-between items-center pb-6">
         {/* LEFT SIDE */}
-        <div className="logo">LootBox Labs</div>
+        <Link href="/" className="logo cursor-pointer no-underline hover:underline">
+            LootBox Labs
+        </Link>
         {/* RIGHT SIDE */}
         <div className="flex gap-4 items-center">
           {/* 🔹 Clerk Authentication Buttons (Sign In/Sign Up) */}
@@ -70,7 +73,12 @@ export default function Nav() {
             {navMenuOpen && (
               <div className="z-50 absolute top-8 right-0 bg-gray-50/60 backdrop-blur-md p-6 rounded-md shadow-lg border border-black flex w-max">
                 <div className="flex flex-col gap-4">
-                  <h2>Home</h2>
+                  <Link href="/" className="cursor-pointer no-underline hover:underline font-bold">
+                    <h2>Home</h2>
+                  </Link>
+                  <Link href="/profile" className="cursor-pointer no-underline hover:underline">
+                  Purchases
+                  </Link>
                   <p>All Boxes</p>
                   <p>About Us</p>
                   <p>Contact Us</p>
