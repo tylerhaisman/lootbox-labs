@@ -51,8 +51,8 @@ export default function Nav() {
           <div
             className={
               navMenuOpen
-                ? "flex flex-col duration-100 relative"
-                : "flex flex-col gap-1 duration-100 relative"
+                ? "flex flex-col duration-100 relative p-2 cursor-pointer"
+                : "flex flex-col gap-1 duration-100 relative p-2 cursor-pointer"
             }
             onClick={() => setNavMenuOpen(!navMenuOpen)}
           >
@@ -79,7 +79,9 @@ export default function Nav() {
                   <Link href="/profile" className="cursor-pointer no-underline hover:underline">
                   Purchases
                   </Link>
+                  <Link href="/allboxes" className="cursor-pointer no-underline hover:underline">
                   <p>All Boxes</p>
+                  </Link>
                   <p>About Us</p>
                   <p>Contact Us</p>
                 </div>
