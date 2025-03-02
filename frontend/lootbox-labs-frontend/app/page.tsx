@@ -66,7 +66,7 @@ export default function Home() {
               <div className="mt-4">
                 <h1>Designer Watches</h1>
                 <p>Unbox for your chance to win a Rolex or Swiss Army watch.</p>
-                <Link href="/box/box_id" className="cursor-pointer no-underline hover:underline">
+                <Link href="/box/box_id" className="cursor-pointer no-underline">
                 <button className="flex justify-center items-center mt-4 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200 px-4 py-2 rounded-md hover:shadow-inner duration-75">
                   See More
                   <div className=" arrow flex items-center justify-center">
