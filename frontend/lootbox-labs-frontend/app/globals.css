@@ -87,3 +87,35 @@ button:hover .arrowMiddle {
 a {
   text-decoration: underline;
 }
+
+@keyframes openBox {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(1) translateY(-50px);
+  }
+}
+
+@keyframes closeBox {
+  0% {
+    transform: scaleY(1) translateY(-50px);
+  }
+  50% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-box {
+  animation: openBox 0.5s ease-in-out forwards;
+}
+
+.reset-box {
+  animation: closeBox 0.5s ease-in-out forwards;
+}
