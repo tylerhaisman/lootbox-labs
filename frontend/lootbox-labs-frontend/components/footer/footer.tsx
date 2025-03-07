@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 //ICONS
 import GitHubIcon from "../../public/assets/icons/github-142-svgrepo-com.svg";
 
@@ -19,7 +19,9 @@ export default function Footer() {
       <div className="flex-1 flex gap-4 justify-between lg:flex-row flex-col">
         <div className="flex flex-col gap-4">
           <h2>Features</h2>
+          <Link href="/allboxes" className="cursor-pointer no-underline hover:underline">
           <p>All Boxes</p>
+          </Link>
           <p>Featured Boxes</p>
         </div>
         <div className="flex flex-col gap-4">
