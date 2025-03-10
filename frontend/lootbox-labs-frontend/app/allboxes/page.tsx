@@ -78,6 +78,12 @@ export default function AllBoxes() {
                 <option value="Oldest">Oldest</option>
                 <option value="Price (High to Low)">Price (High to Low)</option>
                 <option value="Price (Low to High)">Price (Low to High)</option>
+                <option value="Price (High to Low)">
+                  Rarity (High to Low)
+                </option>
+                <option value="Price (Low to High)">
+                  Rarity (Low to High)
+                </option>
               </select>
             </div>
           </div>
