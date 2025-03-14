@@ -4,25 +4,40 @@ from pymongo.server_api import ServerApi
 import os
 import random
 from dotenv import load_dotenv
+from flask_cors import CORS, cross_origin
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
 MONGO_URI = f"mongodb+srv://LootBoxLabs:{MONGO_PASSWORD}@cluster0.hc6vi.mongodb.net/LootBoxLabsDB?retryWrites=true&w=majority&appName=Cluster0"
 
-client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
+client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
 db = client["LootBoxLabsDB"]
 
 users_collection = db["Users"]
 boxes_collection = db["Boxes"]
 
-@app.route('/')
+
+@app.route("/")
 def home():
     return jsonify({"message": "Flask server is running!"}), 200
 
-@app.route('/add', methods=['POST'])
+
+# TEST CLERK OUTPUT
+@app.route("/test", methods=["POST"])
+def test_clerk():
+    data = request.json
+    if not data or "test" not in data:
+        return jsonify({"error": "Invalid input"}), 400
+
+    print("hello world:", data)
+    return jsonify({"message": "test successful"}), 201
+
+
+@app.route("/add", methods=["POST"])
 def add_item():
     data = request.json
     if not data or "name" not in data or "chance" not in data:
@@ -32,25 +47,30 @@ def add_item():
     users_collection.insert_one(item)
     return jsonify({"message": "Item added successfully!"}), 201
 
-@app.route('/remove/<string:item_id>', methods=['DELETE'])
+
+@app.route("/remove/<string:item_id>", methods=["DELETE"])
 def remove_item(item_id):
     result = users_collection.delete_one({"_id": item_id})
     if result.deleted_count == 0:
         return jsonify({"error": "Item not found"}), 404
     return jsonify({"message": "Item removed successfully!"}), 200
 
-@app.route('/update/<string:item_id>', methods=['PUT'])
+
+@app.route("/update/<string:item_id>", methods=["PUT"])
 def update_item(item_id):
     data = request.json
     if "chance" not in data:
         return jsonify({"error": "Invalid input"}), 400
 
-    result = users_collection.update_one({"_id": item_id}, {"$set": {"chance": data["chance"]}})
+    result = users_collection.update_one(
+        {"_id": item_id}, {"$set": {"chance": data["chance"]}}
+    )
     if result.matched_count == 0:
         return jsonify({"error": "Item not found"}), 404
     return jsonify({"message": "Item updated successfully!"}), 200
 
-@app.route('/lootbox', methods=['GET'])
+
+@app.route("/lootbox", methods=["GET"])
 def lootbox():
     items = list(users_collection.find({}))
     if not items:
@@ -63,7 +83,8 @@ def lootbox():
 
     return jsonify({"reward": "No item won"}), 200
 
-@app.route('/boxes', methods=['GET'])
+
+@app.route("/boxes", methods=["GET"])
 def get_boxes():
     boxes = list(boxes_collection.find({}))
     if not boxes:
@@ -71,5 +92,6 @@ def get_boxes():
 
     return jsonify(boxes), 200
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
