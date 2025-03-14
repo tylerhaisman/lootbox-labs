@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,6 +16,18 @@ import BoxLightImage from "../public/assets/images/box-light.png";
 import BoxItemsImage from "../public/assets/images/box-items.png";
 
 export default function Home() {
+  const [data, setData] = useState<{ message: string } | null>(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+
   return (
     <div className="relative">
       <div className="max-w-[1500px] m-auto p-6">
