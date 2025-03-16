@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
 MONGO_URI = f"mongodb+srv://LootBoxLabs:{MONGO_PASSWORD}@cluster0.hc6vi.mongodb.net/LootBoxLabsDB?retryWrites=true&w=majority&appName=Cluster0"
@@ -17,6 +18,8 @@ db = client["LootBoxLabsDB"]
 
 users_collection = db["Users"]
 boxes_collection = db["Boxes"]
+items_collection = db["Items"]
+orders_collection = db["Orders"]
 
 @app.route('/')
 def home():
@@ -50,16 +53,20 @@ def update_item(item_id):
         return jsonify({"error": "Item not found"}), 404
     return jsonify({"message": "Item updated successfully!"}), 200
 
-@app.route('/lootbox', methods=['GET'])
-def lootbox():
-    items = list(users_collection.find({}))
+@app.route('/lootbox/<string:box_name>', methods=['POST'])
+def lootbox(box_name):
+    
+    items = boxes_collection[box_name]["Probability"]
     if not items:
         return jsonify({"error": "No items in lootbox"}), 404
 
     rand_number = random.randint(1, 10000)
+    currentVar = 0;
     for item in items:
-        if rand_number <= item["chance"] * 100:
-            return jsonify({"reward": item["name"]}), 200
+        currentVar += item[0]
+        if rand_number <= currentVar:
+            itemWon = items_collection.find_one({'ItemID' : item[1]})
+            return jsonify({"reward": itemWon["ItemName"]}), 200
 
     return jsonify({"reward": "No item won"}), 200
 
