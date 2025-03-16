@@ -4,6 +4,7 @@ from pymongo.server_api import ServerApi
 import os
 import random
 from dotenv import load_dotenv
+import array
 
 load_dotenv()
 
@@ -68,6 +69,29 @@ def lootbox(box_name):
             itemWon = items_collection.find_one({'ItemID' : item[1]})
             return jsonify({"reward": itemWon["ItemName"]}), 200
 
+    return jsonify({"reward": "No item won"}), 200
+
+@app.route('/lootboxTest/<string:box_name>', methods=['POST'])
+def lootbox(box_name):
+    items = boxes_collection[box_name]["Probability"]
+    rewardArray = [0 for i in range((len(items)) + 2)]
+    if not items:
+        return jsonify({"error": "No items in lootbox"}), 404
+
+    rand_number = random.randint(1, 10000)
+    currentVar = 0
+    i = -1
+    for item in items:
+        i++
+        currentVar += item[0]
+        if rand_number <= currentVar:
+            itemWon = items_collection.find_one({'ItemID' : item[1]})
+            rewardArray[(len(items)) + 1)] += boxes_collection[box_name]["BoxPrice"]
+            rewardArray[(len(items)))] += itemWon["ItemValue"]
+            rewardArray[i] += 1
+            
+            return jsonify({"rewardArray": rewardArray}), 200
+        
     return jsonify({"reward": "No item won"}), 200
 
 @app.route('/boxes', methods=['GET'])
