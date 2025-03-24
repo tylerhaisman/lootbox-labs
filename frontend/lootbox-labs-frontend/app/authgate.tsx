@@ -3,11 +3,15 @@
 import { useUser, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useUserSync } from "../hooks/useUserSync"; // Import the hook
 
 export default function AuthGate({ children }: { children: React.ReactNode }) {
   const { user, isLoaded } = useUser();
   const clerk = useClerk();
   const router = useRouter();
+  
+  // This will sync the user data with our backend
+  useUserSync();
 
   useEffect(() => {
     if (isLoaded && user && !user.primaryEmailAddress?.emailAddress.endsWith("@ufl.edu")) {

@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import os
@@ -123,6 +124,26 @@ def get_boxes():
 
     return jsonify(boxes), 200
 
+@app.route('/users/sync', methods=['POST'])
+def sync_user():
+    data = request.json
+    if not data or "clerkId" not in data:
+        return jsonify({"error": "Invalid input"}), 400
+    
+    # Check if user already exists
+    existing_user = users_collection.find_one({"clerkId": data["clerkId"]})
+    
+    if existing_user:
+        # Update existing user
+        users_collection.update_one(
+            {"clerkId": data["clerkId"]},
+            {"$set": data}
+        )
+        return jsonify({"message": "User updated successfully!"}), 200
+    else:
+        # Create new user
+        users_collection.insert_one(data)
+        return jsonify({"message": "User created successfully!"}), 201
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)
