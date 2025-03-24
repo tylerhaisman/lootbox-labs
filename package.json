@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client": "cd ./frontend/lootbox-labs-frontend && npm run dev",
-    "server": "echo 'start server not configured yet'"
+    "server": "cd ./backend && python app.py",
+    "install-server": "cd ./backend && pip install -r requirements.txt",
+    "freeze-server": "cd ./backend && pip freeze > requirements.txt"
   },
   "author": "",
   "license": "ISC"

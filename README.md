@@ -22,4 +22,34 @@ In the root project directory (`lootbox-labs`), run:
 npm run server
 ```
 
-> server start not configured yet
+or
+
+```
+cd ./backend && python app.py
+```
+
+#### To manage the backend requirements:
+
+To install:
+
+```
+npm run install-server
+```
+
+or
+
+```
+cd ./backend && pip install -r requirements.txt
+```
+
+To write to `requirements.txt`:
+
+```
+npm run freeze-server
+```
+
+or
+
+```
+cd ./backend && pip freeze > requirements.txt
+```
