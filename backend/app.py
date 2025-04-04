@@ -107,7 +107,7 @@ def lootbox(box_name):
 #             currentVar += item[0]
 #             if rand_number <= currentVar:
 #                 itemWon = items_collection.find_one({'ItemID' : item[1]})
-#                 rewardArray[(len(items)) + 1)] += boxes_collection[box_name]["BoxPrice"]
+#                 rewardArray[(len(items)) + 1] += boxes_collection[box_name]["BoxPrice"]
 #                 rewardArray[(len(items)))] += itemWon["ItemValue"]
 #                 rewardArray[i] += 1
 
