@@ -10,18 +10,39 @@ import Nav from "@/components/nav/nav";
 export default function AllBoxes() {
   const { isSignedIn } = useUser();
 
+  // const test = async () => {
+  //   try {
+  //     const response = await fetch("http://127.0.0.1:5001/test", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         test: "hello world",
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   test();
+  // }, []);
+
   const test = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/test", {
-        method: "POST",
+      const response = await fetch("http://127.0.0.1:5001/boxes", {
+        method: "GET",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({
-          test: "hello world",
-        }),
       });
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
