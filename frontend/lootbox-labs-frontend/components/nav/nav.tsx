@@ -9,9 +9,6 @@ export default function Nav() {
   const [navMenuOpen, setNavMenuOpen] = useState(false);
 
   //AUTH
-  const [viewSignIn, setViewSignIn] = useState(false);
-  const [viewAuth, setViewAuth] = useState(false);
-  const [viewRegister, setViewRegister] = useState(false);
   const { isSignedIn } = useUser();
 
   return (
