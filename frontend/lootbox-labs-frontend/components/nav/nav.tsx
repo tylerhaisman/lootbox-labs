@@ -13,11 +13,13 @@ export default function Nav() {
 
   return (
     <>
-     
       <div className="w-full flex justify-between items-center pb-6">
         {/* LEFT SIDE */}
-        <Link href="/" className="logo cursor-pointer no-underline hover:underline">
-            LootBox Labs
+        <Link
+          href="/"
+          className="logo cursor-pointer no-underline hover:underline"
+        >
+          LootBox Labs
         </Link>
         {/* RIGHT SIDE */}
         <div className="flex gap-4 items-center">
@@ -30,7 +32,7 @@ export default function Nav() {
               // If user is not signed in, show Sign In and Sign Up buttons
               <>
                 <SignInButton mode="modal">
-                  <button className="px-4 py-2 border border-black rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-75">
+                  <button className="px-4 py-2 border border-black rounded-md hover:bg-gray-100 transition-colors duration-75">
                     Sign In
                   </button>
                 </SignInButton>
@@ -70,14 +72,23 @@ export default function Nav() {
             {navMenuOpen && (
               <div className="z-50 absolute top-8 right-0 bg-gray-50/60 backdrop-blur-md p-6 rounded-md shadow-lg border border-black flex w-max">
                 <div className="flex flex-col gap-4">
-                  <Link href="/" className="cursor-pointer no-underline hover:underline font-bold">
+                  <Link
+                    href="/"
+                    className="cursor-pointer no-underline hover:underline font-bold"
+                  >
                     <h2>Home</h2>
                   </Link>
-                  <Link href="/profile" className="cursor-pointer no-underline hover:underline">
-                  Purchases
+                  <Link
+                    href="/profile"
+                    className="cursor-pointer no-underline hover:underline"
+                  >
+                    Purchases
                   </Link>
-                  <Link href="/allboxes" className="cursor-pointer no-underline hover:underline">
-                  <p>All Boxes</p>
+                  <Link
+                    href="/allboxes"
+                    className="cursor-pointer no-underline hover:underline"
+                  >
+                    <p>All Boxes</p>
                   </Link>
                   <p>About Us</p>
                   <p>Contact Us</p>

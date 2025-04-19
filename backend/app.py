@@ -138,17 +138,7 @@ def get_boxes():
     if not boxes:
         return jsonify({"error": "No boxes found"}), 404
 
-    serialized_boxes = [serialize_doc(box) for box in boxes]
-    return jsonify(serialized_boxes), 200
-
-
-# @app.route("/boxes", methods=["GET"])
-# def get_boxes():
-#     boxes = list(boxes_collection.find({}))
-#     if not boxes:
-#         return jsonify({"error": "No boxes found"}), 404
-
-#     return jsonify(boxes), 200
+    return jsonify(boxes), 200
 
 
 @app.route("/users/sync", methods=["POST"])
