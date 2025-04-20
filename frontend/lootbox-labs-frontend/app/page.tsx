@@ -49,31 +49,34 @@ export default function Home() {
 
   const getBoxes = async () => {
     try {
-      // const response = await fetch("http://127.0.0.1:5001/boxes", {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // });
-      // const data = await response.json();
-      // console.log(data);
-      // setBoxes(data);
-      // ----
-      const sampleData: BoxInterface[] = [
-        {
-          _id: "67f87d4cf3c53416db8b35ff",
-          BoxName: "PenBox",
-          BoxPrice: 15.99,
-          Probability: [
-            [5000, 4],
-            [2000, 5],
-            [2000, 6],
-          ],
-          Categories: ["Hot", "Fashion", "Featured"],
-          Description: "Unbox for your chance to win a limited edition pen.",
+      const response = await fetch("http://127.0.0.1:5001/boxes", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
         },
-      ];
-      setBoxes(sampleData);
+      });
+      const data = await response.json();
+      console.log(data);
+      setBoxes(data);
+      // ----
+      // SAMPLE DATA FOR TESTING
+      // Uncomment the following lines to use sample data instead of fetching from the API
+      // ----
+      // const sampleData: BoxInterface[] = [
+      //   {
+      //     _id: "67f87d4cf3c53416db8b35ff",
+      //     BoxName: "PenBox",
+      //     BoxPrice: 15.99,
+      //     Probability: [
+      //       [5000, 4],
+      //       [2000, 5],
+      //       [2000, 6],
+      //     ],
+      //     Categories: ["Hot", "Fashion", "Featured"],
+      //     Description: "Unbox for your chance to win a limited edition pen.",
+      //   },
+      // ];
+      // setBoxes(sampleData);
     } catch (error) {
       console.error(error);
     }
@@ -179,6 +182,47 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
+          </div>
+          <div className="shadow-lg border border-black rounded-md p-12 mt-16 flex justify-center items-center flex-col gap-12">
+            <div className="w-full px-6 rounded-md t relative z-20 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200">
+              <div className="t relative z-20 bg-gradient-to-b from-black via-black to-transparent bg-clip-text text-transparent">
+                About us
+              </div>
+            </div>
+            <div className="flex justify-between gap-6 items-center">
+              <div className="">
+                <p className="">
+                  At LootBox Labs, we're four college students on a mission to
+                  make online shopping more exciting, unpredictable, and just a
+                  little bit addictive—in the best way. Born out of a shared
+                  passion for sleek software and high-stakes surprises, our team
+                  set out to reimagine the e-commerce experience through the
+                  lens of gamification.
+                  <br></br> <br></br>
+                  We built LootBox Labs as part of a semester-long course
+                  project, but from day one, we approached it like a real
+                  startup. Tyler and Isaac handled the front-end magic using
+                  React and Next.js, crafting a polished, interactive user
+                  experience. Neal and Connor engineered the backend with Flask
+                  and MongoDB, building a secure and scalable system to power
+                  the mystery behind every box.
+                  <br></br> <br></br>
+                  At the heart of LootBox Labs is a fair randomization
+                  algorithm—because when it comes to mystery, nothing beats a
+                  truly even shot. Whether you're aiming for a rare collectible
+                  or just seeing what luck brings your way, our platform
+                  delivers the thrill of chance with every purchase. It's kind
+                  of like pulling a slot machine lever... except you always walk
+                  away with something in your cart.
+                  <br></br> <br></br>
+                  We believe online shopping shouldn't just be about
+                  transactions—it should be about anticipation, surprise, and a
+                  little dose of dopamine. So go ahead—spin the wheel, open the
+                  box, and see what's inside.
+                </p>
+              </div>
+              <div className=""></div>
+            </div>
           </div>
         </div>
         {/* FOOTER */}

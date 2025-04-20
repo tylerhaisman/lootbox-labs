@@ -49,31 +49,34 @@ export default function AllBoxes() {
 
   const getBoxes = async () => {
     try {
-      // const response = await fetch("http://127.0.0.1:5001/boxes", {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // });
-      // const data = await response.json();
-      // console.log(data);
-      // setBoxes(data);
-      // ----
-      const sampleData: BoxInterface[] = [
-        {
-          _id: "67f87d4cf3c53416db8b35ff",
-          BoxName: "PenBox",
-          BoxPrice: 15.99,
-          Probability: [
-            [5000, 4],
-            [2000, 5],
-            [2000, 6],
-          ],
-          Categories: ["All", "Fashion", "Featured"],
-          Description: "Unbox for your chance to win a limited edition pen.",
+      const response = await fetch("http://127.0.0.1:5001/boxes", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
         },
-      ];
-      setBoxes(sampleData);
+      });
+      const data = await response.json();
+      console.log(data);
+      setBoxes(data);
+      // ----
+      // SAMPLE DATA FOR TESTING
+      // Uncomment the following lines to use sample data instead of fetching from the API
+      // ----
+      // const sampleData: BoxInterface[] = [
+      //   {
+      //     _id: "67f87d4cf3c53416db8b35ff",
+      //     BoxName: "PenBox",
+      //     BoxPrice: 15.99,
+      //     Probability: [
+      //       [5000, 4],
+      //       [2000, 5],
+      //       [2000, 6],
+      //     ],
+      //     Categories: ["All", "Fashion", "Featured"],
+      //     Description: "Unbox for your chance to win a limited edition pen.",
+      //   },
+      // ];
+      // setBoxes(sampleData);
     } catch (error) {
       console.error(error);
     }
@@ -145,7 +148,7 @@ export default function AllBoxes() {
                 className="border border-black rounded-md px-4 py-2 outline-none"
               >
                 <option value="Recommended">Recommended</option>
-                <option value="Newest">Newest</option>
+                {/* <option value="Newest">Newest</option>
                 <option value="Oldest">Oldest</option>
                 <option value="Price (High to Low)">Price (High to Low)</option>
                 <option value="Price (Low to High)">Price (Low to High)</option>
@@ -154,7 +157,7 @@ export default function AllBoxes() {
                 </option>
                 <option value="Price (Low to High)">
                   Rarity (Low to High)
-                </option>
+                </option> */}
               </select>
             </div>
           </div>
