@@ -21,10 +21,8 @@ const imageMap: Record<string, StaticImageData> = {
   PenBox,
 };
 
-
 // Default image to use when a specific box image isn't found
 const defaultBoxImage = BoxLightImage;
-
 
 interface BoxInterface {
   BoxName: string;
@@ -139,7 +137,6 @@ export default function Home() {
                       />
                       <Image
                         src={imageMap[box.BoxName] || defaultBoxImage}
-
                         alt={box.BoxName + " Image"}
                         className="absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
                       ></Image>
@@ -188,6 +185,23 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
+            <Link href={"/allboxes"} className="cursor-pointer no-underline">
+              <button className="flex justify-center items-center w-fit hover:underline">
+                See All Boxes
+                <div className="arrow flex items-center justify-center">
+                  <div className="arrowMiddle"></div>
+                  <div>
+                    <Image
+                      src={ArrowIcon}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className="arrowSide"
+                    />
+                  </div>
+                </div>
+              </button>
+            </Link>
           </div>
           <div className="shadow-lg border border-black rounded-md p-12 mt-16 flex justify-center items-center flex-col gap-12">
             <div className="w-full px-6 rounded-md t relative z-20 bg-gradient-to-r from-purple-200 via-yellow-200 to-pink-200">
