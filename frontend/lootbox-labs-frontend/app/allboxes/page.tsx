@@ -21,7 +21,12 @@ import AllBoxesCover from "../../public/assets/images/allboxescover.png";
 
 const imageMap: Record<string, StaticImageData> = {
   PenBox,
+  
 };
+
+// Default image to use when a specific box image isn't found
+const defaultBoxImage = BoxLightImage;
+
 
 interface BoxInterface {
   BoxName: string;
@@ -178,7 +183,9 @@ export default function AllBoxes() {
                       className="absolute bottom-0 left-0 right-0 w-3/5 m-auto"
                     />
                     <Image
-                      src={imageMap[box.BoxName] || ""}
+
+                      src={imageMap[box.BoxName] || defaultBoxImage}
+
                       alt={box.BoxName + " Image"}
                       className="absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
                     />
