@@ -189,6 +189,47 @@ def get_boxes():
         return jsonify({"error": f"Failed to fetch boxes: {str(e)}"}), 500
 
 
+@app.route("/boxes/<string:box_name>/items", methods=["GET"])
+def get_box_items(box_name):
+    try:
+        # Find the box by name
+        box = boxes_collection.find_one({"BoxName": box_name})
+        
+        if not box:
+            return jsonify({"error": f"Lootbox '{box_name}' not found"}), 404
+            
+        items_data = box.get("Probability")
+        if not items_data or len(items_data) == 0:
+            return jsonify({"error": "No items in this lootbox"}), 404
+
+        # Get details for each item
+        box_items = []
+        for item_data in items_data:
+            # Extract item ID and chance
+            item_id = int(item_data[1]) if isinstance(item_data[1], dict) and "$numberInt" in item_data[1] else int(item_data[1])
+            item_chance = int(item_data[0]) if isinstance(item_data[0], dict) and "$numberInt" in item_data[0] else int(item_data[0])
+            
+            # Find item details
+            item = items_collection.find_one({"ItemID": item_id})
+            if item:
+                # Calculate percentage chance (out of 10000)
+                chance_percent = item_chance / 100.0
+                
+                box_items.append({
+                    "id": item_id,
+                    "name": item.get("ItemName", "Unknown Item"),
+                    "value": item.get("ItemValue", 0),
+                    "chance": chance_percent,
+                    "image": item.get("ImagePath", "")
+                })
+        
+        return jsonify(box_items), 200
+        
+    except Exception as e:
+        print(f"Error getting box items: {str(e)}")
+        return jsonify({"error": f"Failed to get box items: {str(e)}"}), 500
+
+
 @app.route('/users/sync', methods=['POST'])
 def sync_user():
     data = request.json
