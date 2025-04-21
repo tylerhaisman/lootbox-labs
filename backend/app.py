@@ -8,7 +8,14 @@ from dotenv import load_dotenv
 import array
 from flask_cors import CORS, cross_origin
 from bson import ObjectId
-import json
+
+
+
+def serialize_doc(doc):
+    doc["_id"] = str(doc["_id"])
+    return doc
+
+
 
 load_dotenv()
 
@@ -26,9 +33,18 @@ CORS(app)
 app.json_encoder = MongoJSONEncoder
 
 MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
+print(f"MONGO_PASSWORD: {MONGO_PASSWORD}")
+
 MONGO_URI = f"mongodb+srv://LootBoxLabs:{MONGO_PASSWORD}@cluster0.hc6vi.mongodb.net/LootBoxLabsDB?retryWrites=true&w=majority&appName=Cluster0"
 
 client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
+
+try:
+    client.admin.command("ping")
+    print("MongoDB connection successful")
+except Exception as e:
+    print("MongoDB connection failed:", e)
+
 db = client["LootBoxLabsDB"]
 
 users_collection = db["Users"]
@@ -230,26 +246,25 @@ def get_box_items(box_name):
         return jsonify({"error": f"Failed to get box items: {str(e)}"}), 500
 
 
-@app.route('/users/sync', methods=['POST'])
+
+@app.route("/users/sync", methods=["POST"])
 def sync_user():
     data = request.json
     if not data or "clerkId" not in data:
         return jsonify({"error": "Invalid input"}), 400
-    
+
     # Check if user already exists
     existing_user = users_collection.find_one({"clerkId": data["clerkId"]})
-    
+
     if existing_user:
         # Update existing user
-        users_collection.update_one(
-            {"clerkId": data["clerkId"]},
-            {"$set": data}
-        )
+        users_collection.update_one({"clerkId": data["clerkId"]}, {"$set": data})
         return jsonify({"message": "User updated successfully!"}), 200
     else:
         # Create new user
         users_collection.insert_one(data)
         return jsonify({"message": "User created successfully!"}), 201
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True, port=5001)

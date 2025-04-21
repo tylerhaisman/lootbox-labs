@@ -51,5 +51,5 @@ npm run freeze-server
 or
 
 ```
-cd ./backend && pip freeze > requirements.txt
+cd ./backend && pip list --format=freeze > requirements.txt
 ```

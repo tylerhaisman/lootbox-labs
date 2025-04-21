@@ -21,8 +21,10 @@ const imageMap: Record<string, StaticImageData> = {
   PenBox,
 };
 
+
 // Default image to use when a specific box image isn't found
 const defaultBoxImage = BoxLightImage;
+
 
 interface BoxInterface {
   BoxName: string;
@@ -137,6 +139,7 @@ export default function Home() {
                       />
                       <Image
                         src={imageMap[box.BoxName] || defaultBoxImage}
+
                         alt={box.BoxName + " Image"}
                         className="absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
                       ></Image>
