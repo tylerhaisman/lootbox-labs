@@ -34,26 +34,37 @@ export default function ProfilePage() {
   const [purchases, setPurchases] = useState<PurchaseInterface[]>([]);
 
   const fetchUserData = async (id: string) => {
-    const response = await fetch("http://localhost:5001/users/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        clerkId: id,
-      }),
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Failed to get user data");
-        }
-        const data = await response.json();
-        console.log("User data fetched successfully:", data.purchases);
-        setPurchases(data.purchases);
-      })
-      .catch((error) => {
-        console.error("Error getting user data:", error);
+    try {
+      const response = await fetch("http://localhost:5001/users/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          clerkId: id,
+        }),
       });
+      
+      if (!response.ok) {
+        throw new Error("Failed to get user data");
+      }
+      
+      const data = await response.json();
+      console.log("User data fetched successfully:", data);
+      
+      
+      if (data && Array.isArray(data.purchases)) {
+        setPurchases(data.purchases);
+      } else {
+    
+        console.log("No purchases found or invalid format");
+        setPurchases([]);
+      }
+    } catch (error) {
+      console.error("Error getting user data:", error);
+      
+      setPurchases([]);
+    }
   };
 
   useEffect(() => {
