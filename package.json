@@ -7,6 +7,7 @@
     "client": "cd ./frontend/lootbox-labs-frontend && npm run dev",
     "server": "cd ./backend && python app.py",
     "install-server": "cd ./backend && pip install -r requirements.txt",
+    "install-client": "cd ./frontend/lootbox-labs-frontend && npm i",
     "freeze-server": "cd ./backend && pip list --format=freeze > requirements.txt"
   },
   "author": "",

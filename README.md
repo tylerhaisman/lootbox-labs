@@ -12,6 +12,20 @@ In the root project directory (`lootbox-labs`), run:
 npm run client
 ```
 
+#### To manage the front-end requirements:
+
+To install:
+
+```
+npm run install-client
+```
+
+or
+
+```
+cd ./frontend/lootbox-labs-frontend && npm i
+```
+
 ## Server
 
 ### To start the back-end (server):
@@ -28,7 +42,7 @@ or
 cd ./backend && python app.py
 ```
 
-#### To manage the backend requirements:
+#### To manage the back-end requirements:
 
 To install:
 
