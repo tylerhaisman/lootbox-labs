@@ -16,17 +16,36 @@ import ArrowIcon from "../../public/assets/icons/arrow-up-337-svgrepo-com.svg";
 
 //IMAGES
 import BoxLightImage from "../../public/assets/images/box-light.png";
-import PenBox from "../../public/assets/images/pen.webp";
+import PenBoxImage from "../../public/assets/images/pen.webp";
+import SampleBoxImage from "../../public/assets/images/samplebox.jpg";
+import GamesBoxImage from "../../public/assets/images/gaming-control-remote-on-transparent-background-free-png.webp";
+import WatchBoxImage from "../../public/assets/images/22576-7-rolex-watch-transparent-image.png";
+import FunkoBoxImage from "../../public/assets/images/64d8849d1bda9716522b682f-funko-pop-marvel-avengers-game-iron.png";
+import FlowerBoxImage from "../../public/assets/images/Flower_Transparent_PNG_Image.png";
+import FurnitureBoxImage from "../../public/assets/images/pngtree-contemporary-linen-sofa-on-white-studio-background-a-png-image_10294836.png";
+import TShirtBoxImage from "../../public/assets/images/pngtree-white-t-shirt-mockup-realistic-t-shirt-png-image_9906363.png";
+import ShoeBoxImage from "../../public/assets/images/pngtree-dropshipping-men-hole-sole-jogging-shoes-png-image_11389148.png";
+import SweetsBoxImage from "../../public/assets/images/candy-png-22.png";
+import OurGradeOnTheProjectBoxImage from "../../public/assets/images/A-PNG-Picture.png";
+
 import AllBoxesCover from "../../public/assets/images/allboxescover.png";
 
 const imageMap: Record<string, StaticImageData> = {
-  PenBox,
-  
+  PenBoxImage,
+  SampleBoxImage,
+  GamesBoxImage,
+  WatchBoxImage,
+  FunkoBoxImage,
+  FlowerBoxImage,
+  FurnitureBoxImage,
+  TShirtBoxImage,
+  ShoeBoxImage,
+  SweetsBoxImage,
+  OurGradeOnTheProjectBoxImage,
 };
 
 // Default image to use when a specific box image isn't found
-const defaultBoxImage = BoxLightImage;
-
+const defaultBoxImage = SampleBoxImage;
 
 interface BoxInterface {
   BoxName: string;
@@ -183,11 +202,9 @@ export default function AllBoxes() {
                       className="absolute bottom-0 left-0 right-0 w-3/5 m-auto"
                     />
                     <Image
-
-                      src={imageMap[box.BoxName] || defaultBoxImage}
-
+                      src={imageMap[box.BoxName + "Image"] || defaultBoxImage}
                       alt={box.BoxName + " Image"}
-                      className="absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
+                      className="rotate-6 rounded-md absolute z-20 w-20 top-0 bottom-0 left-0 right-0 m-auto drop-shadow-xl"
                     />
                   </div>
                   <div

@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";
+import type { StaticImageData } from "next/image";
+
+const MotionImage = motion(Image);
 
 // COMPONENTS
 import Footer from "@/components/footer/footer";
@@ -17,26 +20,56 @@ const LightEffect = "/assets/images/lighteffect.webp";
 const WatchPrize = "/assets/images/22576-7-rolex-watch-transparent-image.png";
 
 // Image mapping
-const imageOptions = {
-  pen: "/assets/images/pen.webp",
-  batman: "/assets/images/batman-01-logo-png-transparent.png",
-  florida: "/assets/images/Florida_Gators_gator_logo.svg.png",
-  watch: "/assets/images/22576-7-rolex-watch-transparent-image.png",
-  default: "/assets/images/lootboxclosed.webp",
+// const imageOptions = {
+//   pen: "/assets/images/pen.webp",
+//   batman: "/assets/images/batman-01-logo-png-transparent.png",
+//   florida: "/assets/images/Florida_Gators_gator_logo.svg.png",
+//   watch: "/assets/images/22576-7-rolex-watch-transparent-image.png",
+//   default: "/assets/images/lootboxclosed.webp",
+// };
+
+//IMAGES
+import PenBoxImage from "../../../public/assets/images/pen.webp";
+import SampleBoxImage from "../../../public/assets/images/samplebox.jpg";
+import GamesBoxImage from "../../../public/assets/images/gaming-control-remote-on-transparent-background-free-png.webp";
+import WatchBoxImage from "../../../public/assets/images/22576-7-rolex-watch-transparent-image.png";
+import FunkoBoxImage from "../../../public/assets/images/64d8849d1bda9716522b682f-funko-pop-marvel-avengers-game-iron.png";
+import FlowerBoxImage from "../../../public/assets/images/Flower_Transparent_PNG_Image.png";
+import TShirtBoxImage from "../../../public/assets/images/pngtree-white-t-shirt-mockup-realistic-t-shirt-png-image_9906363.png";
+import FurnitureBoxImage from "../../../public/assets/images/pngtree-contemporary-linen-sofa-on-white-studio-background-a-png-image_10294836.png";
+import ShoeBoxImage from "../../../public/assets/images/pngtree-dropshipping-men-hole-sole-jogging-shoes-png-image_11389148.png";
+import SweetsBoxImage from "../../../public/assets/images/candy-png-22.png";
+import OurGradeOnTheProjectBoxImage from "../../../public/assets/images/A-PNG-Picture.png";
+
+import AllBoxesCover from "../../public/assets/images/allboxescover.png";
+
+const imageMap: Record<string, StaticImageData> = {
+  PenBoxImage,
+  SampleBoxImage,
+  GamesBoxImage,
+  WatchBoxImage,
+  FunkoBoxImage,
+  FlowerBoxImage,
+  FurnitureBoxImage,
+  TShirtBoxImage,
+  ShoeBoxImage,
+  SweetsBoxImage,
+  OurGradeOnTheProjectBoxImage,
+  default: SampleBoxImage,
 };
 
 // Function to find the most appropriate image for a box based on its name
-function findBoxImage(boxName: string): string {
-  const lowerName = boxName.toLowerCase();
+// function findBoxImage(boxName: string): string {
+//   const lowerName = boxName.toLowerCase();
 
-  for (const [keyword, imagePath] of Object.entries(imageOptions)) {
-    if (lowerName.includes(keyword.toLowerCase())) {
-      return imagePath;
-    }
-  }
+//   for (const [keyword, imagePath] of Object.entries(imageMap)) {
+//     if (lowerName.includes(keyword.toLowerCase())) {
+//       return imagePath;
+//     }
+//   }
 
-  return imageOptions.default;
-}
+//   return imageMap.default;
+// }
 
 interface BoxInterface {
   BoxName: string;
@@ -250,6 +283,8 @@ export default function BoxPage() {
     );
   }
 
+  if (!user) return <p>Please log in to see this box.</p>;
+
   return (
     <div className="relative">
       <div className="max-w-[1500px] m-auto p-6">
@@ -326,10 +361,13 @@ export default function BoxPage() {
               )}
 
               {/* REVEALED PRIZE */}
-              {showPrize && (
+              {showPrize && box && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <motion.img
-                    src={WatchPrize}
+                  <MotionImage
+                    src={
+                      imageMap[box.BoxName + "Image"] ||
+                      imageMap["SampleBoxImage"]
+                    }
                     alt={wonItem || "Prize"}
                     className="absolute inset-0 m-auto transform -translate-y-1/2"
                     initial={{ opacity: 0, y: -50, scale: 0.1 }}

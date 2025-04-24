@@ -101,15 +101,35 @@ def test_clerk():
     return jsonify({"message": "test successful"}), 201
 
 
-@app.route("/add", methods=["POST"])
+@app.route("/add_item", methods=["POST"])
 def add_item():
+    data = request.json
+    if (
+        not data
+        or "ItemName" not in data
+        or "ItemValue" not in data
+        or "ItemId" not in data
+    ):
+        return jsonify({"error": "Invalid input"}), 400
+
+    item = {
+        "ItemName": data["ItemName"],
+        "ItemValue": data["ItemValue"],
+        "ItemId": data["ItemId"],
+    }
+    items_collection.insert_one(item)
+    return jsonify({"message": "Item added successfully!"}), 201
+
+
+@app.route("/add_box", methods=["POST"])
+def add_box():
     data = request.json
     if not data or "name" not in data or "chance" not in data:
         return jsonify({"error": "Invalid input"}), 400
 
-    item = {"name": data["name"], "chance": data["chance"]}
-    users_collection.insert_one(item)
-    return jsonify({"message": "Item added successfully!"}), 201
+    box = {"name": data["name"], "chance": data["chance"]}
+    boxes_collection.insert_one(box)
+    return jsonify({"message": "Box added successfully!"}), 201
 
 
 @app.route("/remove/<string:item_id>", methods=["DELETE"])
